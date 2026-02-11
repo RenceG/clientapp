@@ -58,7 +58,6 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [article, setArticle] = useState<KnowledgeArticle | null>(null);
 
-  // Filter articles that somewhat match the query
   const filteredArticles = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return ARTICLES;
@@ -73,7 +72,6 @@ export default function App() {
     });
   }, [query]);
 
-  // Only show an article after the user types something
   useEffect(() => {
     const q = query.trim();
     if (!q) {
@@ -102,17 +100,16 @@ export default function App() {
         />
 
         {query.trim().length === 0 ? (
-          <div style={styles.noResults}>
-            Start typing to search knowledge...
-          </div>
+          <div style={styles.hint}>Start typing to search knowledge...</div>
         ) : filteredArticles.length === 0 ? (
-          <div style={styles.noResults}>
+          <div style={styles.hint}>
             No matching articles found for: <b>{query}</b>
           </div>
         ) : article ? (
           <div style={styles.card}>
             <div style={styles.metaRow}>
               <span style={styles.kbId}>{article.id}</span>
+
               <span style={styles.tags}>
                 {article.tags.map((t) => (
                   <span key={t} style={styles.tag}>
@@ -134,95 +131,128 @@ export default function App() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
+  // Fill the iframe and let Genesys control the available width/height
   page: {
-    minHeight: "100vh",
-    padding: 24,
+    height: "100vh",
+    width: "100%",
+    margin: 0,
+    padding: 0,
+    overflow: "auto",
     background: "#0b1220",
     color: "#e8eefc",
     fontFamily: "Inter, system-ui, Arial, sans-serif",
   },
+
+  // IMPORTANT: no fixed maxWidth here — adapt to Small/Medium/Large/XL
+  // Padding scales smoothly with panel width.
   container: {
-    maxWidth: 720,
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
+    width: "100%",
+    padding: "clamp(10px, 2.2vw, 20px)",
+    boxSizing: "border-box",
   },
+
   header: {
-    fontSize: 28,
-    marginBottom: 14,
+    fontSize: "clamp(18px, 2.2vw, 26px)",
+    margin: "0 0 12px 0",
+    lineHeight: 1.2,
   },
+
+  // Input matches the same width as the card (100% of container)
   search: {
     width: "100%",
-    maxWidth: 720,
-    padding: "14px 14px",
+    boxSizing: "border-box",
+    padding: "clamp(10px, 1.4vw, 14px)",
     borderRadius: 12,
     border: "1px solid rgba(255,255,255,0.15)",
     background: "rgba(255,255,255,0.06)",
     color: "#e8eefc",
     outline: "none",
-    fontSize: 16,
-    boxSizing: "border-box",
+    fontSize: "clamp(14px, 1.6vw, 16px)",
   },
-  noResults: {
-    marginTop: 18,
-    padding: 16,
+
+  hint: {
+    marginTop: 12,
+    padding: "clamp(10px, 1.8vw, 14px)",
     borderRadius: 12,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.04)",
+    fontSize: "clamp(13px, 1.5vw, 14px)",
   },
+
   card: {
-    marginTop: 18,
-    padding: 18,
+    marginTop: 12,
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "clamp(12px, 2vw, 18px)",
     borderRadius: 18,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.04)",
     boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
   },
+
   metaRow: {
     display: "flex",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 10,
     alignItems: "center",
     marginBottom: 10,
+    flexWrap: "wrap", // helps small widths
   },
+
   kbId: {
-    fontSize: 12,
-    opacity: 0.8,
+    fontSize: "clamp(11px, 1.3vw, 12px)",
+    opacity: 0.85,
     border: "1px solid rgba(255,255,255,0.14)",
     padding: "6px 10px",
     borderRadius: 999,
+    whiteSpace: "nowrap",
   },
+
   tags: {
     display: "flex",
     gap: 6,
     flexWrap: "wrap",
     justifyContent: "flex-end",
+    flex: 1,
   },
+
   tag: {
-    fontSize: 12,
+    fontSize: "clamp(11px, 1.2vw, 12px)",
     opacity: 0.85,
     padding: "5px 10px",
     borderRadius: 999,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.03)",
+    whiteSpace: "nowrap",
   },
+
   title: {
-    fontSize: 20,
+    fontSize: "clamp(16px, 2vw, 20px)",
     margin: "6px 0 6px 0",
+    lineHeight: 1.25,
   },
+
   summary: {
-    opacity: 0.9,
+    opacity: 0.92,
     margin: "0 0 12px 0",
     lineHeight: 1.5,
+    fontSize: "clamp(13px, 1.6vw, 15px)",
   },
+
+  // Pre will wrap and stay readable at small widths.
+  // MaxHeight gives better behavior if the panel is short.
   body: {
     margin: 0,
-    padding: 14,
+    padding: "clamp(10px, 1.8vw, 14px)",
     borderRadius: 14,
     background: "rgba(0,0,0,0.35)",
     border: "1px solid rgba(255,255,255,0.08)",
     whiteSpace: "pre-wrap",
+    wordBreak: "break-word",
     lineHeight: 1.5,
-    fontSize: 14,
+    fontSize: "clamp(12px, 1.5vw, 14px)",
+    maxHeight: "40vh",
+    overflow: "auto",
+    boxSizing: "border-box",
   },
 };
