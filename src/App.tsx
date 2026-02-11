@@ -131,7 +131,6 @@ export default function App() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  // Fill the iframe and let Genesys control the available width/height
   page: {
     height: "100vh",
     width: "100%",
@@ -143,67 +142,66 @@ const styles: Record<string, React.CSSProperties> = {
     fontFamily: "Inter, system-ui, Arial, sans-serif",
   },
 
-  // IMPORTANT: no fixed maxWidth here — adapt to Small/Medium/Large/XL
-  // Padding scales smoothly with panel width.
+  // More compact base padding (better for Genesys Small)
   container: {
     width: "100%",
-    padding: "clamp(10px, 2.2vw, 20px)",
+    padding: "10px",
     boxSizing: "border-box",
   },
 
   header: {
-    fontSize: "clamp(18px, 2.2vw, 26px)",
-    margin: "0 0 12px 0",
+    fontSize: "16px",
+    margin: "0 0 10px 0",
     lineHeight: 1.2,
   },
 
-  // Input matches the same width as the card (100% of container)
   search: {
     width: "100%",
     boxSizing: "border-box",
-    padding: "clamp(10px, 1.4vw, 14px)",
+    padding: "10px 12px",
     borderRadius: 12,
     border: "1px solid rgba(255,255,255,0.15)",
     background: "rgba(255,255,255,0.06)",
     color: "#e8eefc",
     outline: "none",
-    fontSize: "clamp(14px, 1.6vw, 16px)",
+    fontSize: "14px",
   },
 
   hint: {
-    marginTop: 12,
-    padding: "clamp(10px, 1.8vw, 14px)",
+    marginTop: 10,
+    padding: "10px 12px",
     borderRadius: 12,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.04)",
-    fontSize: "clamp(13px, 1.5vw, 14px)",
+    fontSize: "13px",
+    lineHeight: 1.4,
   },
 
   card: {
-    marginTop: 12,
+    marginTop: 10,
     width: "100%",
     boxSizing: "border-box",
-    padding: "clamp(12px, 2vw, 18px)",
-    borderRadius: 18,
+    padding: "12px",
+    borderRadius: 16,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.04)",
     boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
   },
 
+  // For small width: stack meta info nicely
   metaRow: {
     display: "flex",
-    justifyContent: "space-between",
-    gap: 10,
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 8,
     marginBottom: 10,
-    flexWrap: "wrap", // helps small widths
   },
 
   kbId: {
-    fontSize: "clamp(11px, 1.3vw, 12px)",
+    fontSize: "11px",
     opacity: 0.85,
     border: "1px solid rgba(255,255,255,0.14)",
-    padding: "6px 10px",
+    padding: "5px 9px",
     borderRadius: 999,
     whiteSpace: "nowrap",
   },
@@ -212,14 +210,13 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     gap: 6,
     flexWrap: "wrap",
-    justifyContent: "flex-end",
-    flex: 1,
+    justifyContent: "flex-start",
   },
 
   tag: {
-    fontSize: "clamp(11px, 1.2vw, 12px)",
+    fontSize: "11px",
     opacity: 0.85,
-    padding: "5px 10px",
+    padding: "5px 9px",
     borderRadius: 999,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.03)",
@@ -227,31 +224,29 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   title: {
-    fontSize: "clamp(16px, 2vw, 20px)",
+    fontSize: "15px",
     margin: "6px 0 6px 0",
     lineHeight: 1.25,
   },
 
   summary: {
     opacity: 0.92,
-    margin: "0 0 12px 0",
-    lineHeight: 1.5,
-    fontSize: "clamp(13px, 1.6vw, 15px)",
+    margin: "0 0 10px 0",
+    lineHeight: 1.45,
+    fontSize: "13px",
   },
 
-  // Pre will wrap and stay readable at small widths.
-  // MaxHeight gives better behavior if the panel is short.
   body: {
     margin: 0,
-    padding: "clamp(10px, 1.8vw, 14px)",
+    padding: "10px 12px",
     borderRadius: 14,
     background: "rgba(0,0,0,0.35)",
     border: "1px solid rgba(255,255,255,0.08)",
     whiteSpace: "pre-wrap",
     wordBreak: "break-word",
-    lineHeight: 1.5,
-    fontSize: "clamp(12px, 1.5vw, 14px)",
-    maxHeight: "40vh",
+    lineHeight: 1.45,
+    fontSize: "12px",
+    maxHeight: "38vh",
     overflow: "auto",
     boxSizing: "border-box",
   },
