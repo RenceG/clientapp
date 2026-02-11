@@ -150,7 +150,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   header: {
-    fontSize: "16px",
+    fontSize: "14px",
     margin: "0 0 10px 0",
     lineHeight: 1.2,
   },
@@ -164,7 +164,7 @@ const styles: Record<string, React.CSSProperties> = {
     background: "rgba(255,255,255,0.06)",
     color: "#e8eefc",
     outline: "none",
-    fontSize: "14px",
+    fontSize: "12px",
   },
 
   hint: {
@@ -173,7 +173,7 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 12,
     border: "1px solid rgba(255,255,255,0.12)",
     background: "rgba(255,255,255,0.04)",
-    fontSize: "13px",
+    fontSize: "12px",
     lineHeight: 1.4,
   },
 
