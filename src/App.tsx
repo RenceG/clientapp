@@ -150,7 +150,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   header: {
-    fontSize: "14px",
+    fontSize: "16px",
     margin: "0 0 10px 0",
     lineHeight: 1.2,
   },
